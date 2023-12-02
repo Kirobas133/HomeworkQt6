@@ -85,12 +85,9 @@ void MainWindow::StartRace(void){
 
     if(ui->rb_qtConcur->isChecked()){
 
-
-        //QFuture<void> future1 = QtConcurrent::run(concurRace1, &ExampleRace::DoWork2);
-        QFuture<void> future1 = QtConcurrent::run(concurRace1->DoWork2);
-        //future.then(QtConcurrent::run(concurRace1.DoWork, &number, ui->rb_mutexOn->isChecked(), ui->sb_initNum->value())).then(QtConcurrent::run(concurRace2.DoWork, &number, ui->rb_mutexOn->isChecked(), ui->sb_initNum->value()));
-        concurRace1->DoWork2();
-        ui->te_debug->append("Выполни ДЗ!");
+        QFuture<void> future = QtConcurrent::run([this]() {concurRace1->DoWork(&number, ui->rb_mutexOn->isChecked(), ui->sb_initNum->value());});
+        future.then([this](){concurRace2->DoWork(&number, ui->rb_mutexOn->isChecked(), ui->sb_initNum->value());});
+        //ui->te_debug->append("Выполни ДЗ!");
         //Тут должен быть код ДЗ
 
     }

@@ -1,6 +1,7 @@
 #ifndef EXAMPLERACE_H
 #define EXAMPLERACE_H
 
+#include "qdebug.h"
 #include <QThread>
 #include <QMutex>
 #include <functional>
